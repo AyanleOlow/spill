@@ -1,70 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Combat Screen</title>
     <link rel="stylesheet" href="../styles/combat_screen_styles.css" />
-    <link rel="stylesheet" href="/images/bladeandstrategy.png">
-  </head>
-  <body>
-  <div class="screen"> 
+</head>
+<body>
+    <div class="screen"> 
+        <!-- Game Grid -->
+        <div class="boxes" id="game-board">
+            <div class="grid-slot" data-index="0"></div>
+            <div class="grid-slot" data-index="1"></div>
+            <div class="grid-slot" data-index="2"></div>
+            <div class="grid-slot" data-index="3"></div>
+            <div class="grid-slot" data-index="4"></div>
+            <div class="grid-slot" data-index="5"></div>
+            <div class="grid-slot" data-index="6"></div>
+            <div class="grid-slot" data-index="7"></div>
+            <div class="grid-slot" data-index="8"></div>
+            <div class="grid-slot" data-index="9"></div>
+            <div class="grid-slot" data-index="10"></div>
+            <div class="grid-slot" data-index="11"></div>
+            <div class="grid-slot" data-index="12"></div>
+            <div class="grid-slot" data-index="13"></div>
+            <div class="grid-slot" data-index="14"></div>
+            <div class="grid-slot" data-index="15"></div>
+            <div class="grid-slot" data-index="16"></div>
+            <div class="grid-slot" data-index="17"></div>
+        </div>
+        
+        <!-- Player & Enemy Info -->
+        <div class="info-box"> 
+            <div id="player" class="player">
+                <img src="../images/player.png" alt="Player" style="width: 100px; height: 100px;">
+                <div id="player-info">
+                    <p>Health: <span id="player-health">10000</span></p> 
+                    <p>Mana: <span id="player-mana">10</span></p>
+                </div>
+            </div>
 
-    <div class="boxes">
-      <div class="box1"></div>
-      <div class="box2"></div>
-      <div class="box3"></div>      
-      <div class="box4"></div>
-      <div class="box5"></div>
-      <div class="box6"></div>
-      <div class="box7"></div>
-      <div class="box8"></div>
-      <div class="box9"></div>
-      <div class="box10"></div>
-      <div class="box11"></div>
-      <div class="box12"></div>      
-      <div class="box13"></div>
-      <div class="box14"></div>
-      <div class="box15"></div>
-      <div class="box16"></div>
-      <div class="box17"></div>
-      <div class="box18"></div>
+            <div id="enemy" class="enemy">
+                <img src="../images/cpu.png" alt="Enemy" style="width: 100px; height: 100px;">
+                <div id="enemy-info"> 
+                    <p>Health: <span id="enemy-health">10000</span></p>
+                    <p>Mana: <span id="enemy-mana">10</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Draw & Hand -->
+        <div class="card-area">
+            <button id="draw-card">Draw Card</button>
+            <div id="player-hand" class="player-hand"></div>
+        </div>
     </div>
 
-    <div class="info-box"> 
-
-     <div id="player" class="player">
-      <img src="../images/player.png" alt="" style="width: 100px; height: 100px;">
-      <div id="player-info">
-        <p id="player-health">10000</p> 
-        <p id="player-mana">10</p>
-
-      </div>
-
-     </div>
-     <div id="enemy" class="enemy">
-      <img src="../images/cpu.png" alt="" style="width: 100px; height: 100px;">
-      <div id="enemy-info"> 
-        <p id="enemy-health">10000</p>
-        <p id="enemy-mana">10</p>
-      </div>
-
-     </div>
- 
-  </div>
- 
- 
- 
- 
- 
- 
- 
- 
- 
-    </div>
-  </body>
-
- <script src="../javascript/combat.js"></script>
-
-
+    <script src="../javascript/combat.js"></script>
+</body>
 </html>
