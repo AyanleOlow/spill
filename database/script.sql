@@ -10,3 +10,4 @@ CREATE TABLE cards (
     attack INT DEFAULT 0,
     defense INT DEFAULT 0
 );
+

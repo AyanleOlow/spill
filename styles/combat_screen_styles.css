@@ -7,6 +7,38 @@ body {
     height: 100vh;
 }
 
+
+/* Background Video */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Keep existing styles */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+}
+
+/* Adjust game screen to ensure visibility over the video */
+.screen {
+    position: relative;
+    z-index: 1;
+}
+
+/* Adjust UI elements to ensure readability */
+
+
+
+
 .boxes {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -23,7 +55,7 @@ body {
     height: 200px;
     justify-content: center;
     align-items: center;
-    background-color: rgb(177, 166, 166);
+    
 }
 
 .grid-slot:hover {
@@ -82,4 +114,14 @@ body {
     align-items: center;
     font-size: 18px;
     cursor: pointer;
+    
+}
+
+.enlarged-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
 }
