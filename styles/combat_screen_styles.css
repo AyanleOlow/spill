@@ -36,7 +36,11 @@ body {
 
 /* Adjust UI elements to ensure readability */
 
-
+.exit{
+   display: inline;
+    position: relative;
+    right: 900px;
+}
 
 
 .boxes {
@@ -47,7 +51,6 @@ body {
     justify-content: center;
     margin-bottom: 20px;
 }
-
 .grid-slot {
     display: flex;
     border: solid blue;
@@ -55,11 +58,27 @@ body {
     height: 200px;
     justify-content: center;
     align-items: center;
-    
+    position: relative;
+    bottom: 70px;
+    overflow: hidden; /* Ensures images don't overflow */
+}
+
+.grid-slot .card {
+    width: 130px;
+    height: 190px;
+}
+
+
+
+.grid-slot .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the entire slot */
 }
 
 .grid-slot:hover {
     background-color: gray;
+    opacity: 50%;
     cursor: pointer;
 }
 
@@ -78,7 +97,11 @@ body {
     align-items: center;
     padding: 10px;
 }
-
+.player{
+    position: relative;
+    right: 70px;
+    bottom: 90px;
+}
 .enemy {
     position: relative;
     left: 275px;
@@ -89,7 +112,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    position: relative;
+    bottom: 200PX;
 }
 
 #draw-card {

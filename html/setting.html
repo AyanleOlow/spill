@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>setting</title>
+    <title>Setting</title>
     <link rel="stylesheet" href="../styles/setting.css">
 </head>
 <body>
     <div class="setting-container">
-
         <div class="tittle">
             <h1>SETTING</h1>
-       <a href="../html/menu.html" target="_blank"><img src="../images/reject.png" alt="" style=" flex-direction: row; width: 70px; height: 100; margin-left: 300px;"></a> 
+            <a href="../html/menu.html" target="_blank">
+                <img src="../images/reject.png" alt="" style=" flex-direction: row; width: 70px; height: 100; margin-left: 300px;">
+            </a> 
         </div>
         
         <div>
@@ -26,14 +27,26 @@
                 </svg>
             </label>
         </div>
-        
-        
-        
     </div>
+    <script src="../javascript/setting.js">
+
+document.addEventListener("DOMContentLoaded", function() {
+            let volumeSlider = document.querySelector(".level");
+
+            // Load the saved volume from localStorage when the page loads
+            let savedVolume = localStorage.getItem("audioVolume");
+            if (savedVolume === null) {
+                savedVolume = 0.5; // Default value if nothing is saved
+            }
+
+            volumeSlider.value = savedVolume;
+
+            // When the slider value changes, save it to localStorage
+            volumeSlider.addEventListener("input", function() {
+                localStorage.setItem("audioVolume", volumeSlider.value);
+            });
+        });
+
+    </script>
 </body>
-
-<script src="../javascript/setting.js">
-    
-</script>
-
 </html>
