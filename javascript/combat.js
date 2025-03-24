@@ -18,7 +18,7 @@ function updateUI() {
 }
 updateUI();
 
-// hele deck of card med navn, catogory, attack, deffence, mana og bilde
+
 const deck = [
     // 🔥 Basic Monsters (10)
     { name: "Shadow Soldier", type: "dark_monster", element: "dark" ,category: "basic", attack: 600, defence: 400, mana: 3, image: "../images/monster/Shadow_Soldier.png" },                                                      
@@ -50,6 +50,7 @@ const deck = [
     { name: "Abyss Kraken", type: "water_monster", category: "legendary",element: "dark" , attack: 1600, defence: 900, mana: 8, image: "../images/monster/Abyss_Kraken.png" },
     { name: "Infernal Cerberus", type: "fire_monster", category: "legendary", element: "dark" ,attack: 1400, defence: 1100, mana: 7, image: "../images/monster/Infernal_Cerberus.png" },
     { name: "Runic Colossus", type: "earth_monster", category: "legendary",element: "dark" , attack: 1200, defence: 1400, mana: 7, image: "../images/monster/Runic_Colossus.png" },
+    { name: "Runic Colossus", type: "lightning_monster", category: "legendary",element: "dark" , attack: 1200, defence: 1400, mana: 7, image: "../images/monster/mohamuudy.png" },
     // 🌀 Spells (15)
     { name: "Solar Flare", type: "spell",element: "spell" , image: "../images/spell/Solar_Flare.png" },
     { name: "Mystic Resonance", type: "spell",element: "spell" , image: "../images/spell/Mystic_Resonance.png" },

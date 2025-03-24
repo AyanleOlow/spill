@@ -32,6 +32,7 @@
         { name: "Abyss Kraken", type: "water_monster", category: "legendary",element: "dark" , attack: 1600, defence: 900, mana: 8, image: "../images/monster/Abyss_Kraken.png" },
         { name: "Infernal Cerberus", type: "fire_monster", category: "legendary", element: "dark" ,attack: 1400, defence: 1100, mana: 7, image: "../images/monster/Infernal_Cerberus.png" },
         { name: "Runic Colossus", type: "earth_monster", category: "legendary",element: "dark" , attack: 1200, defence: 1400, mana: 7, image: "../images/monster/Runic_Colossus.png" },
+        { name: "Runic Colossus", type: "lightning_monster", category: "legendary",element: "dark" , attack: 1200, defence: 1400, mana: 7, image: "../images/monster/mohamuudy.png" },
         // 🌀 Spells (15)
         { name: "Solar Flare", type: "spell",element: "spell" , image: "../images/spell/Solar_Flare.png" },
         { name: "Mystic Resonance", type: "spell",element: "spell" , image: "../images/spell/Mystic_Resonance.png" },
@@ -83,22 +84,52 @@
         cardResults.appendChild(cardEl);
     });
      
-    // const filteredCards = cards.filter((card) => {
-    //   return returnCardType("monster", card) && card.category == "basic";
-    // });
-     
-    // function returnCardType(type, card){
-    //   return card.type == type;
-    // }
-     
-    // console.log(filteredCards);
-     
-    // document.getElementById("all").addEventListener("click", function(){
-    //     if 
-    // })
+   // Get the card container
+const cardResults = document.getElementById("card-results");
+
+// Function to create and display cards
+function displayCards(filteredDeck) {
+    // Clear the existing cards
+    cardResults.innerHTML = "";
+
+    // Loop through the filtered deck and create elements
+    filteredDeck.forEach((card) => {
+        const cardEl = document.createElement("div");
+        cardEl.classList.add("card");
+        cardEl.setAttribute("data-type", card.type); // Set data attribute for filtering
+        cardEl.style.width = "200px";
+        cardEl.style.height = "290px";
+        cardEl.style.backgroundImage = `url(${card.image})`;
+        cardEl.style.border = "solid black";
+        cardEl.style.backgroundSize = "cover";
+        cardEl.style.backgroundRepeat = "no-repeat";
+        cardEl.style.gap = "10px";
+        cardEl.style.padding = "20px";
+
+        cardResults.appendChild(cardEl);
+    });
+}
+
+// Display all cards initially
+displayCards(deck);
+
+// Add event listener to filter buttons
+document.querySelectorAll(".navbar a").forEach((button) => {
+    button.addEventListener("click", function (event) {
+        event.preventDefault(); 
+
+        const category = this.innerText.toLowerCase(); 
+        if (category === "all") {
+            displayCards(deck); 
+        } else {
             
-    
-    
+            const filteredDeck = deck.filter((card) =>
+                card.type.includes(category)
+            );
+            displayCards(filteredDeck);
+        }
+    });
+});
 
 
 
