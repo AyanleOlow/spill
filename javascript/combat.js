@@ -9,7 +9,7 @@ const enemy = {
     mana: 10
 };
 
-// Update UI
+// oppdaterer UI hele tiden
 function updateUI() {
     document.getElementById("player-health").innerText = player.health;
     document.getElementById("player-mana").innerText = player.mana;
@@ -18,6 +18,9 @@ function updateUI() {
 }
 updateUI();
 
+//her så ser man alle kortene som jeg kaller deck . jeg har legge navn, type, catogory, attack, defence, mana og bilde på kortene.
+// jeg har også lagt til 3 forskjellige kategorier som er basic, advanced og legendary.
+// jeg legge til 10 basic kort, 10 advanced kort, 5 legendary kort, 16 spell card, 10 buff card og 5 debuff card .
 
 const deck = [
     // 🔥 Basic Monsters (10)
@@ -35,7 +38,7 @@ const deck = [
     // ⚔️ Advanced Monsters (10)
     { name: "Solar Stag", type: "light_monster", category: "advanced",element: "dark" , attack: 850, defence: 700, mana: 4, image: "../images/monster/Solar_Stag.png" },                                                                 
     { name: "Molten Colossus", type: "fire_monster", category: "advanced",element: "dark" , attack: 1200, defence: 500, mana: 3, image: "../images/monster/Molten_Colossus.png" },                                         
-    { name: "Phantom Ronin", type: "ghost_monster", category: "advanced",element: "dark" , attack: 900, defence: 500, mana: 5, image: "../images/monster/Phantom_Ronin.png" },                                                                                 
+    { name: "Phantom Ronin", type: "ghost_monster", category: "advanced",element: "dark" , attack: 900, defence: 500, mana: 5, image: "../images/monster/Phantom_Ronin.png" },                                                                                  
     { name: "Blizzard Fang", type: "ice_monster", category: "advanced",element: "dark" , attack: 800, defence: 600, mana: 4, image: "../images/monster/Blizzard_Fang.png" },                                         
     { name: "Crimson Scarab", type: "insect_monster", category: "advanced",element: "dark" , attack: 950, defence: 500, mana: 4, image: "../images/monster/Crimson_Scarab.png" },                                                     
     { name: "Astral Chimera", type: "dark_monster", category: "advanced",element: "dark" , attack: 1000, defence: 700, mana: 5, image: "../images/monster/Astral_Chimera.png" },                                                       
@@ -88,10 +91,14 @@ const deck = [
     { name: "Unstable Mutation", type: "debuff",element: "debuff" , image: "../images/debuff&buff/Unstable_Mutation.png" }
     ];
 
+// her så henter den id fra html til javascript for å vise kortene i player hand og draw button
 
 const playerHand = document.getElementById("player-hand");
 const drawButton = document.getElementById("draw-card");
 const gameBoard = document.getElementById("game-board");
+
+// her så tar den en random kort når spillern klicker på draw button og legger det til i player hand 
+// zog det er maxisum 5 kort man kan beholde hele tiden
 
 drawButton.addEventListener("click", () => {
     if (playerHand.children.length < 5) {
@@ -99,12 +106,14 @@ drawButton.addEventListener("click", () => {
         const card = document.createElement("div");
         card.classList.add("card");
 
-        
         card.innerHTML = `<img src="${randomCard.image}" alt="${randomCard.name}" width="80">`;
 
         card.dataset.name = randomCard.name;
         card.dataset.type = randomCard.type;
         card.dataset.image = randomCard.image;
+        card.dataset.attack = randomCard.attack || 0; // Default to 0 if not a monster
+        card.dataset.defence = randomCard.defence || 0; // Default to 0 if not a monster
+        card.dataset.owner = "player"; // Mark as a player's card
         card.addEventListener("click", () => selectCard(card));
 
         playerHand.appendChild(card);
@@ -116,6 +125,9 @@ let selectedCard = null;
 function selectCard(card) {
     selectedCard = card;
 }
+
+//her så lager den en restriction for spillerene og enemy for hvor de kan legge kortene sine.
+// spillerene kan legge kortene sine i slot 12-17 og enemy kan legge kortene sine i slot 0-5 og 6-11
 
 gameBoard.addEventListener("click", (event) => {
     const slot = event.target;
@@ -141,17 +153,71 @@ gameBoard.addEventListener("click", (event) => {
         setTimeout(enemyTurn, 1000);
     }
 });
+
+let selectedGridCard = null;
+
+// Function to handle card clicks on the grid
+gameBoard.addEventListener("click", (event) => {
+    const slot = event.target.closest(".grid-slot");
+    if (!slot || !slot.children.length) return; // Ensure the slot contains a card
+
+    const cardElement = slot.querySelector(".card");
+
+    // If a player's card is selected, attack an enemy card
+    if (selectedGridCard && selectedGridCard.dataset.owner === "player" && cardElement.dataset.owner === "enemy") {
+        const playerAttack = parseInt(selectedGridCard.dataset.attack);
+        const enemyDefence = parseInt(cardElement.dataset.defence);
+        const damage = Math.max(playerAttack - enemyDefence, 0);
+
+        // Update enemy health
+        enemy.health -= damage;
+        updateUI();
+
+        alert(`Player attacked! Damage dealt: ${damage}`);
+
+        // Reset selection
+        selectedGridCard = null;
+        return;
+    }
+
+    // If an enemy card is selected, attack a player's card
+    if (selectedGridCard && selectedGridCard.dataset.owner === "enemy" && cardElement.dataset.owner === "player") {
+        const enemyAttack = parseInt(selectedGridCard.dataset.attack);
+        const playerDefence = parseInt(cardElement.dataset.defence);
+        const damage = Math.max(enemyAttack - playerDefence, 0);
+
+        // Update player health
+        player.health -= damage;
+        updateUI();
+
+        alert(`Enemy attacked! Damage dealt: ${damage}`);
+
+        // Reset selection
+        selectedGridCard = null;
+        return;
+    }       
+
+    // Select a card for attack
+    selectedGridCard = cardElement;
+    alert(`Selected card: ${cardElement.dataset.name} (Owner: ${cardElement.dataset.owner})`);
+});
+
+// Function to place a card on the grid
 function placeCard(slot, card) {
     const placedCard = document.createElement("div");
     placedCard.classList.add("card");
 
-   
+    // Add attack, defence, and owner data to the placed card
+    placedCard.dataset.name = card.dataset.name;
+    placedCard.dataset.attack = card.dataset.attack;
+    placedCard.dataset.defence = card.dataset.defence;
+    placedCard.dataset.owner = card.dataset.owner; // "player" or "enemy"
     placedCard.innerHTML = `<img src="${card.dataset.image}" alt="${card.dataset.name}">`;
 
     slot.appendChild(placedCard);
 }
 
-
+// Enemy turn logic to place cards and attack
 function enemyTurn() {
     const availableSlots = Array.from(document.querySelectorAll(".grid-slot"))
         .filter(slot => slot.children.length === 0)
@@ -169,24 +235,20 @@ function enemyTurn() {
         if (enemyCard.type === "monster") {
             enemy.mana -= enemyCard.manaCost;
             updateUI();
-
-            if (enemyCard.type === "monster") {
-                enemy.health -= player.health;
-                updateUI();
-            }
         }
 
         const enemySlot = availableSlots[Math.floor(Math.random() * availableSlots.length)];
         const enemyCardElement = document.createElement("div");
         enemyCardElement.classList.add("card");
 
-        // Enemy card now only displays the image
+        // Add attack, defence, and owner data to the enemy card
+        enemyCardElement.dataset.name = enemyCard.name;
+        enemyCardElement.dataset.attack = enemyCard.attack || 0;
+        enemyCardElement.dataset.defence = enemyCard.defence || 0;
+        enemyCardElement.dataset.owner = "enemy"; // Mark as an enemy's card
         enemyCardElement.innerHTML = `<img src="${enemyCard.image}" alt="${enemyCard.name}" width="80">`;
-        
+
         enemySlot.appendChild(enemyCardElement);
     }
 }
-
-
-
 

@@ -1,6 +1,10 @@
-
-    const noe = document.getElementById("noe");
+const noe = document.getElementById("noe");
  
+
+//her så ser man alle kortene som jeg kaller deck . jeg har legge navn, type, catogory, attack, defence, mana og bilde på kortene.
+// jeg har også lagt til 3 forskjellige kategorier som er basic, advanced og legendary.
+// jeg legge til 10 basic kort, 10 advanced kort, 5 legendary kort, 16 spell card, 10 buff card og 5 debuff card .
+
     const deck = [
         // 🔥 Basic Monsters (10)
         { name: "Shadow Soldier", type: "dark_monster", element: "dark" ,category: "basic", attack: 600, defence: 400, mana: 3, image: "../images/monster/Shadow_Soldier.png" },                                                      
@@ -70,6 +74,8 @@
         { name: "Unstable Mutation", type: "debuff",element: "debuff" , image: "../images/debuff&buff/Unstable_Mutation.png" }
         ];
      
+        //
+
     deck.forEach((card) => {
         const cardResults = document.getElementById("card-results");
         const cardEl = document.createElement("div");
@@ -118,6 +124,8 @@ document.querySelectorAll(".navbar a").forEach((button) => {
     button.addEventListener("click", function (event) {
         event.preventDefault(); 
 
+        
+
         const category = this.innerText.toLowerCase(); 
         if (category === "all") {
             displayCards(deck); 
@@ -129,6 +137,31 @@ document.querySelectorAll(".navbar a").forEach((button) => {
             displayCards(filteredDeck);
         }
     });
+});
+
+// Function to filter and display cards based on search input
+function searchCards() {
+  const searchInput = document.getElementById("search-input").value.toLowerCase();
+  const cards = document.querySelectorAll("#card-results .card");
+
+  cards.forEach((card) => {
+    const cardName = card.style.backgroundImage.toLowerCase(); // Use the card's image or name
+    if (cardName.includes(searchInput)) {
+      card.style.display = "block"; // Show matching cards
+    } else {
+      card.style.display = "none"; // Hide non-matching cards
+    }
+  });
+}
+
+// Add event listener to the search button
+document.getElementById("search-button").addEventListener("click", searchCards);
+
+// Optional: Add "Enter" key functionality for the search input
+document.getElementById("search-input").addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    searchCards();
+  }
 });
 
 
