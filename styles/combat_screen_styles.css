@@ -99,7 +99,7 @@ body {
 }
 .player{
     position: relative;
-    right: 70px;
+    right: 90px;
     bottom: 90px;
 }
 .enemy {
@@ -149,3 +149,5 @@ body {
     z-index: 1000;
     transition: transform 0.3s ease-in-out;
 }
+
+

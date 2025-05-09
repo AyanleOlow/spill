@@ -40,7 +40,7 @@ const deck = [
     { name: "Molten Colossus", type: "fire_monster", category: "advanced",element: "dark" , attack: 1200, defence: 500, mana: 3, image: "../images/monster/Molten_Colossus.png" },                                         
     { name: "Phantom Ronin", type: "ghost_monster", category: "advanced",element: "dark" , attack: 900, defence: 500, mana: 5, image: "../images/monster/Phantom_Ronin.png" },                                                                                  
     { name: "Blizzard Fang", type: "ice_monster", category: "advanced",element: "dark" , attack: 800, defence: 600, mana: 4, image: "../images/monster/Blizzard_Fang.png" },                                         
-    { name: "Crimson Scarab", type: "insect_monster", category: "advanced",element: "dark" , attack: 950, defence: 500, mana: 4, image: "../images/monster/Crimson_Scarab.png" },                                                     
+    { name: "Crimson Scarab", type: "insect_monster", category: "advanced",element: "dark" , attack: 950, defence: 500, mana: 4, image: "../images/monster/Crimson_Scarab.png" },                                                    
     { name: "Astral Chimera", type: "dark_monster", category: "advanced",element: "dark" , attack: 1000, defence: 700, mana: 5, image: "../images/monster/Astral_Chimera.png" },                                                       
     { name: "M.ZY", type: "steel_monster", category: "advanced",element: "dark" , attack: 700, defence: 1000, mana: 5, image: "../images/monster/M.ZY.png" },                                                                         
     { name: "Thunderborn Striker", type: "lightning_monster", category: "advanced", element: "dark" ,attack: 1100, defence: 500, mana: 5, image: "../images/monster/Thunderborn_Striker.png" },                                                                                         
@@ -138,11 +138,11 @@ gameBoard.addEventListener("click", (event) => {
     if ((slotIndex >= 12 && slotIndex <= 17) || (slotIndex >= 6 && slotIndex <= 11)) {
         if (selectedCard.dataset.type === "monster") {
             const manaCost = parseInt(selectedCard.dataset.manaCost);
-            if (player.mana < manaCost) {
+            if (player.mana < mana) {
                 alert("Not enough mana to place this monster!");
                 return;
             }
-            player.mana -= manaCost;
+            player.mana -= mana;
             updateUI();
         }
 
@@ -171,9 +171,8 @@ gameBoard.addEventListener("click", (event) => {
 
         // Update enemy health
         enemy.health -= damage;
+        alert(`Enemy takes ${damage} damage!`);
         updateUI();
-
-        alert(`Player attacked! Damage dealt: ${damage}`);
 
         // Reset selection
         selectedGridCard = null;
@@ -188,18 +187,16 @@ gameBoard.addEventListener("click", (event) => {
 
         // Update player health
         player.health -= damage;
+        alert(`Player takes ${damage} damage!`);
         updateUI();
-
-        alert(`Enemy attacked! Damage dealt: ${damage}`);
 
         // Reset selection
         selectedGridCard = null;
         return;
-    }       
+    }
 
     // Select a card for attack
     selectedGridCard = cardElement;
-    alert(`Selected card: ${cardElement.dataset.name} (Owner: ${cardElement.dataset.owner})`);
 });
 
 // Function to place a card on the grid
@@ -233,7 +230,7 @@ function enemyTurn() {
         } while (enemyCard.type === "monster" && enemy.mana < enemyCard.manaCost);
 
         if (enemyCard.type === "monster") {
-            enemy.mana -= enemyCard.manaCost;
+            enemy.mana -= enemyCard.mana;
             updateUI();
         }
 
