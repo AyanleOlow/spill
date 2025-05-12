@@ -54,18 +54,18 @@ body {
 .grid-slot {
     display: flex;
     border: solid blue;
-    width: 150px;
-    height: 200px;
+    width: 100px;
+    height: 150px;
     justify-content: center;
     align-items: center;
     position: relative;
-    bottom: 70px;
-    overflow: hidden; /* Ensures images don't overflow */
+    bottom: 50px;
+    overflow: visible; /* Ensures images don't overflow */
 }
 
 .grid-slot .card {
-    width: 130px;
-    height: 190px;
+    width: 100px;
+    height: 150px;
 }
 
 
@@ -78,7 +78,7 @@ body {
 
 .grid-slot:hover {
     background-color: gray;
-    opacity: 50%;
+
     cursor: pointer;
 }
 
@@ -99,13 +99,13 @@ body {
 }
 .player{
     position: relative;
-    right: 90px;
+    right: 300px;
     bottom: 90px;
 }
 .enemy {
     position: relative;
-    left: 275px;
-    bottom: 660px;
+    left: 290px;
+    bottom: 600px;
 }
 
 .card-area {
@@ -141,13 +141,27 @@ body {
     
 }
 
-.enlarged-card {
+ 
+/* Add hover effect for cards to take over the entire screen */
+.card:hover {
+    position: relative;
+    /* top: 50%;
+    left: 50%; */
+    transform: scale(3);
+    z-index: 1000; 
+    transition: transform 0.3s ease-in-out; 
+    background-color: white; 
+    z-index: 101;
+} 
+
+
+/* .enlarged-card {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(2);
+    transform: translate(-50%, -50%) scale(10);
     z-index: 1000;
     transition: transform 0.3s ease-in-out;
 }
 
-
+ */

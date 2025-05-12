@@ -130,6 +130,7 @@ function selectCard(card) {
 // spillerene kan legge kortene sine i slot 12-17 og enemy kan legge kortene sine i slot 0-5 og 6-11
 
 gameBoard.addEventListener("click", (event) => {
+    console.log(event)
     const slot = event.target;
     if (!selectedCard || !slot.classList.contains("grid-slot") || slot.children.length > 0) return;
 
@@ -248,4 +249,24 @@ function enemyTurn() {
         enemySlot.appendChild(enemyCardElement);
     }
 }
+
+// Add hover functionality to enlarge cards after 3 seconds
+let hoverTimeout;
+
+gameBoard.addEventListener("mouseover", (event) => {
+    const card = event.target.closest(".card");
+    if (!card) return;
+
+    hoverTimeout = setTimeout(() => {
+        card.classList.add("enlarge-card");
+    }, 3000); // 3 seconds
+});
+
+gameBoard.addEventListener("mouseout", (event) => {
+    const card = event.target.closest(".card");
+    if (!card) return;
+
+    clearTimeout(hoverTimeout);
+    card.classList.remove("enlarge-card");
+});
 
