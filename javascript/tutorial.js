@@ -37,6 +37,7 @@ const noe = document.getElementById("noe");
         { name: "Infernal Cerberus", type: "fire_monster", category: "legendary", element: "dark" ,attack: 1400, defence: 1100, mana: 7, image: "../images/monster/Infernal_Cerberus.png" },
         { name: "Runic Colossus", type: "earth_monster", category: "legendary",element: "dark" , attack: 1200, defence: 1400, mana: 7, image: "../images/monster/Runic_Colossus.png" },
         { name: "Runic Colossus", type: "lightning_monster", category: "legendary",element: "dark" , attack: 1200, defence: 1400, mana: 7, image: "../images/monster/mohamuudy.png" },
+        { name: "Makmani", type: "poison_monster", category: "legendary",element: "dark" , attack: 1000, defence: 1500, mana: 7, image: "../images/monster/Makmani.png" },
         // 🌀 Spells (15)
         { name: "Solar Flare", type: "spell",element: "spell" , image: "../images/spell/Solar_Flare.png" },
         { name: "Mystic Resonance", type: "spell",element: "spell" , image: "../images/spell/Mystic_Resonance.png" },

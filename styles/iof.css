@@ -1,0 +1,86 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    background-color: rgb(104, 97, 97);
+    height: 100vh;
+}
+
+
+/* Background Video */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.tittle{
+    color: white;
+    position: relative;
+    bottom: 100px;
+}
+
+.video{
+    border: solid 5px black;
+    width: 55vw;
+    height: 55vh;
+     position: relative;
+    bottom: 100px;
+}
+
+.exit{
+   display: inline;
+    position: relative;
+    right: 900px;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 80%;
+    background-color: black;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    bottom: 50px;
+    left: 90px;
+    
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: #444;
+    transition: background-color 0.3s;
+    position: relative;
+    
+}
+
+.navbar a:hover {
+    background-color: #666;
+}
+
+.card-results{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;   
+}
+
+#card_results :hover{
+    background-color: #666;
+    
+}

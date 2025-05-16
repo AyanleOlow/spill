@@ -54,6 +54,7 @@ const deck = [
     { name: "Infernal Cerberus", type: "fire_monster", category: "legendary", element: "dark" ,attack: 1400, defence: 1100, mana: 7, image: "../images/monster/Infernal_Cerberus.png" },
     { name: "Runic Colossus", type: "earth_monster", category: "legendary",element: "dark" , attack: 1200, defence: 1400, mana: 7, image: "../images/monster/Runic_Colossus.png" },
     { name: "Runic Colossus", type: "lightning_monster", category: "legendary",element: "dark" , attack: 1200, defence: 1400, mana: 7, image: "../images/monster/mohamuudy.png" },
+    { name: "Makmani", type: "poison_monster", category: "legendary",element: "dark" , attack: 1000, defence: 1500, mana: 7, image: "../images/monster/Makmani.png" },
     // 🌀 Spells (15)
     { name: "Solar Flare", type: "spell",element: "spell" , image: "../images/spell/Solar_Flare.png" },
     { name: "Mystic Resonance", type: "spell",element: "spell" , image: "../images/spell/Mystic_Resonance.png" },
@@ -170,10 +171,20 @@ gameBoard.addEventListener("click", (event) => {
         const enemyDefence = parseInt(cardElement.dataset.defence);
         const damage = Math.max(playerAttack - enemyDefence, 0);
 
+        // Remove the enemy card immediately if its defence is zero or less
+        if (damage >= enemyDefence) {
+            cardElement.parentElement.removeChild(cardElement);
+             enemy.health -= damage;
+            alert(`Enemy takes ${damage} damage!`);
+            updateUI();
         // Update enemy health
-        enemy.health -= damage;
-        alert(`Enemy takes ${damage} damage!`);
-        updateUI();
+        } else {
+            // Update player health
+            enemy.health -= damage;
+            alert(`enemy takes ${damage} damage!`);
+            updateUI();
+          
+        }
 
         // Reset selection
         selectedGridCard = null;
@@ -186,10 +197,16 @@ gameBoard.addEventListener("click", (event) => {
         const playerDefence = parseInt(cardElement.dataset.defence);
         const damage = Math.max(enemyAttack - playerDefence, 0);
 
-        // Update player health
-        player.health -= damage;
-        alert(`Player takes ${damage} damage!`);
-        updateUI();
+        // Remove the player's card immediately if its defence is zero or less
+        if (damage >= playerDefence) {
+            cardElement.parentElement.removeChild(cardElement);
+            alert(`Player card is destroyed!`);
+        } else {
+            // Update player health
+            player.health -= damage;
+            alert(`Player takes ${damage} damage!`);
+            updateUI();
+        }
 
         // Reset selection
         selectedGridCard = null;
